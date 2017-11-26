@@ -1,5 +1,2 @@
 ---
 # handlers file for nanomsg-role
-- name: ldconfig
-  become: true
-  command: ldconfig

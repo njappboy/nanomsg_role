@@ -37,4 +37,7 @@
   command: cmake --build . --target install
   args:
     chdir: "/tmp/{{ nanomsg_role_nanomsg_version_name }}/build"
-  notify: ldconfig
+
+- name: ldconfig
+  become: true
+  command: ldconfig
