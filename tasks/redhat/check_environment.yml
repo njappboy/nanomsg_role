@@ -1,0 +1,7 @@
+---
+# file: nanomsg-role/tasks/redhat/check_environment.yml
+#
+# task to set host facts:
+#   - nanomsg is installed?
+#   - which nanomsg version is installed?
+#

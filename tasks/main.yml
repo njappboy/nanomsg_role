@@ -1,0 +1,30 @@
+---
+## include OS family specific information
+
+- import_tasks: debug.yml
+  when: debug | default(false)
+  tags: debug
+
+- name: include OS family/distribution specific variables
+  include_vars: "{{ item }}"
+  with_first_found:
+    - files:
+      - "{{ role_path }}/defaults/{{ ansible_os_family | lower }}-{{ ansible_distribution | lower }}.yml"
+      - "{{ role_path }}/defaults/{{ ansible_os_family | lower }}.yml"
+      skip: true
+  tags: installation
+
+
+## include OS family specific task file
+
+- name: if darwin/macosx, include distribution specific task file
+  import_tasks: "darwin/macosx.yml"
+  when: ansible_os_family | lower == 'darwin' and ansible_distribution | lower == 'macosx'
+
+- name: if debian, include family specific task file
+  import_tasks: "debian/main.yml"
+  when: ansible_os_family | lower == 'debian'
+
+- name: if redhat, include family specific task file
+  import_tasks: "redhat/main.yml"
+  when: ansible_os_family | lower == 'redhat'

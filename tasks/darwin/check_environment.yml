@@ -1,0 +1,7 @@
+---
+# file: nanomsg-role/tasks/darwin/check_environment.yml
+#
+# task to set host facts:
+#   - nanomsg is installed?
+#   - which nanomsg version is installed?
+#

@@ -1,0 +1,13 @@
+# vagrant related
+.vagrant/
+
+# vagrant-env related
+*.env
+!sample.env
+
+# ansible, ansible-playbook, and ansible-galaxy related
+**/*.retry
+roles/
+
+# role build artifact
+nanomsg_role.tar.gz

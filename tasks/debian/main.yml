@@ -1,0 +1,8 @@
+---
+# tasks file for nanomsg-role
+- name: In case there were changes, check host environment again
+  import_tasks: check_environment.yml
+
+- name: Installing {{ nanomsg_role_nanomsg_version_name }}
+  import_tasks: install.yml
+  when: "libnanomsg_so_install_check == false"

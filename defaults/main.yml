@@ -1,0 +1,3 @@
+---
+# defaults file for nanomsg-role
+nanomsg_role_nanomsg_version: "1.0.0"

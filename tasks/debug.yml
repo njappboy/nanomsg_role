@@ -1,0 +1,14 @@
+---
+# file: nanomsg-role/tasks/debug.yml
+#
+# Task that prints variable debug information.
+#
+
+- debug:
+    var="{{ item }}"
+  when: item is defined
+  with_items:
+    - role_path
+    - ansible_os_family
+    - ansible_distribution
+    - nanomsg_role_nanomsg_version

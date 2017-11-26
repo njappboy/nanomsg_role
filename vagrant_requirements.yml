@@ -1,0 +1,3 @@
+---
+- src: nanomsg_role.tar.gz
+  name: nanomsg_role

@@ -1,0 +1,40 @@
+---
+- name: Install build tool - cmake
+  become: true
+  apt:
+    name: cmake
+    state: present
+
+- name: Get nanomsg release archive
+  get_url:
+    url: "https://github.com/nanomsg/nanomsg/archive/{{ nanomsg_role_nanomsg_version }}.tar.gz"
+    dest: "/tmp/{{ nanomsg_role_nanomsg_version_name }}.tar.gz"
+
+- name: Expand release archive.
+  unarchive:
+    src: "/tmp/{{ nanomsg_role_nanomsg_version_name }}.tar.gz"
+    dest: /tmp
+    remote_src: yes
+
+- name: Create nanomsg build directory
+  file:
+    path: "/tmp/{{ nanomsg_role_nanomsg_version_name }}/build"
+    state: directory
+    mode: 0755
+
+- name: Set CMAKE_INSTALL_PREFIX=/usr
+  command: cmake .. -DCMAKE_INSTALL_PREFIX=/usr
+  args:
+    chdir: "/tmp/{{ nanomsg_role_nanomsg_version_name }}/build"
+    
+- name: Running cmake build
+  command: cmake --build .
+  args:
+    chdir: "/tmp/{{ nanomsg_role_nanomsg_version_name }}/build"
+    
+- name: "Install {{ nanomsg_role_nanomsg_version_name }}"
+  become: true
+  command: cmake --build . --target install
+  args:
+    chdir: "/tmp/{{ nanomsg_role_nanomsg_version_name }}/build"
+  notify: ldconfig

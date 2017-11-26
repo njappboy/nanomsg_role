@@ -1,0 +1,5 @@
+---
+# tasks file for nanomsg-role
+
+- name: in case there were changes, check host environment again
+  import_tasks: ../check_environment.yml

@@ -1,0 +1,29 @@
+---
+# file: nanomsg-role/tasks/debian/check_environment.yml
+#
+# task to set host facts:
+#   - is the desired nanomsg version installed?
+
+- name: Set nanomsg_role_nanomsg_version_so_name fact
+  set_fact:
+    nanomsg_role_nanomsg_version_so_name="libnanomsg.so.{{ nanomsg_role_nanomsg_version | quote }}"
+
+- name: Set nanomsg_role_nanomsg_version_name fact
+  set_fact:
+    nanomsg_role_nanomsg_version_name="nanomsg-{{ nanomsg_role_nanomsg_version | quote }}"
+
+- name: Assume {{ nanomsg_role_nanomsg_version_name }} is not installed with libnanomsg_so_install_check fact
+  set_fact:
+    libnanomsg_so_install_check: false
+
+- name: "Determine if version specific libnanomsg.so is installed - {{ nanomsg_role_nanomsg_version_so_name }}"
+  file: 
+    path: /usr/lib/x86_64-linux-gnu/{{ nanomsg_role_nanomsg_version_so_name }}
+  register: libnanomsg_so_install_check_state
+  failed_when: libnanomsg_so_install_check_state.state != "file" and libnanomsg_so_install_check_state.state != "absent"
+
+
+- name: "{{ nanomsg_role_nanomsg_version_so_name }} Is installed"
+  set_fact:
+    libnanomsg_so_install_check: true
+  when: libnanomsg_so_install_check_state.state == "file"

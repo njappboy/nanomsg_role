@@ -1,0 +1,12 @@
+---
+- hosts: all #- hosts: "{{ host | default('localhost') }}"
+  tasks:
+    - name: Build nanomsg_role Ansible Role Archive
+      archive: 
+        path: 
+          - "/vagrant/**/*"
+        exclude_path: 
+          - "nanomsg_role.tar.gz"
+          - "/vagrant/roles/*"
+        dest: /vagrant/nanomsg_role.tar.gz
+        format: gz

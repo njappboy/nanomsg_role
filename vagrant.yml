@@ -1,0 +1,4 @@
+---
+- hosts: "{{ host | default('all') }}"
+  roles:
+    - nanomsg_role
