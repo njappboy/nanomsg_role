@@ -139,10 +139,7 @@ Azure Ansible Role Development with Vagrant
 
 License
 -----
-
-<img src="http://bipcot.org/wp-content/uploads/2015/02/BeastLick1.png" width="48" />
-
-[Bipcot 1.12](http://bipcot.org/wp-content/uploads/2015/02/BipCotNoGovSoftwareLicense-v1point12.txt)
+See the [LICENSE](LICENSE.md) file for license rights and limitations (MIT).
 
 
 Donations Accepted:
